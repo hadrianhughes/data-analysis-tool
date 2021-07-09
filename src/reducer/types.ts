@@ -24,8 +24,11 @@ export type SetSelectedCellAction = {
 }
 
 export type SetEditingAction = {
-  type: 'SET_EDITING',
-  payload: boolean
+  type: 'START_EDITING',
+}
+
+export type StopEditingAction = {
+  type: 'STOP_EDITING'
 }
 
 export type SetActiveCellContentsAction = {
@@ -37,4 +40,5 @@ export type ActionType =
   SetDataAction |
   SetSelectedCellAction |
   SetEditingAction |
-  SetActiveCellContentsAction
+  SetActiveCellContentsAction |
+  StopEditingAction

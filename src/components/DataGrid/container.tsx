@@ -21,11 +21,8 @@ const DataGridContainer = () => {
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.keyCode === 13 && !editing) {
-      dispatch({
-        type: 'SET_EDITING',
-        payload: true
-      })
+    if (e.keyCode === 13) {
+      dispatch({ type: editing ? 'STOP_EDITING' : 'START_EDITING' })
     }
   }
 
@@ -59,7 +56,6 @@ const DataGridContainer = () => {
       editing={editing}
       editValue={editValue}
       onEditCell={handleEditCell}
-      onKeyDown={handleKeyDown}
     />
   )
 }
