@@ -12,4 +12,9 @@ const data: GridData = {
   }
 }
 
-export const Default = () => <DataGrid data={data} />
+export const Default = () => (
+  <DataGrid
+    data={data}
+    onSelect={(row: number, col: number) => console.log(row, col)}
+  />
+)
