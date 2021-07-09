@@ -9,11 +9,15 @@ export const Cell = styled.div<CellProps>`
   border: 1px solid grey;
   border-bottom: none;
   border-right: none;
+  box-sizing: border-box;
+  font-family: sans-serif;
   cursor: cell;
   left: 0;
   padding: 2px 5px;
 `
 
 export const Text = styled.span`
-  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 `
