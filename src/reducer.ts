@@ -9,6 +9,7 @@ export type CellTuple = [number, number]
 export type AppState = {
   gridData: GridData
   selectedCell: CellTuple | null
+  editing: boolean
 }
 
 export type SetDataAction = {
@@ -21,7 +22,15 @@ export type SetSelectedCellAction = {
   payload: CellTuple
 }
 
-export type ActionType = SetDataAction | SetSelectedCellAction
+export type SetEditingAction = {
+  type: 'SET_EDITING',
+  payload: boolean
+}
+
+export type ActionType =
+  SetDataAction |
+  SetSelectedCellAction |
+  SetEditingAction
 
 const initialState = {
   gridData: {
@@ -29,7 +38,8 @@ const initialState = {
       4: 100
     }
   },
-  selectedCell: null
+  selectedCell: null,
+  editing: false
 }
 
 export default function reducer(state: AppState = initialState, action: ActionType) {
@@ -43,6 +53,11 @@ export default function reducer(state: AppState = initialState, action: ActionTy
       return {
         ...state,
         selectedCell: action.payload
+      }
+    case 'SET_EDITING':
+      return {
+        ...state,
+        editing: action.payload
       }
     default:
       return state
