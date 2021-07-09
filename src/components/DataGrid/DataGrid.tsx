@@ -22,7 +22,7 @@ interface DataGridProps {
 const createCellRenderer = (
   data: GridData,
   selectedCell: CellTuple,
-  onClick: SelectFn
+  onMouseDown: SelectFn
 ) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0 && rowIndex > 0
   const isColHeading = rowIndex === 0 && columnIndex > 0
@@ -49,7 +49,7 @@ const createCellRenderer = (
     <Cell
       key={key}
       style={style}
-      onClick={() => onClick(rowIndex, columnIndex)}
+      onMouseDown={() => onMouseDown(rowIndex, columnIndex)}
       isHeading={isRowHeading || isColHeading}
       isRoot={isRoot}
       isSelected={rowIndex === selectedRow && columnIndex === selectedCol}
