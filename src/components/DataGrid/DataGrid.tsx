@@ -1,18 +1,13 @@
 import React from 'react'
 import { MultiGrid } from 'react-virtualized'
 import { Cell, Text } from './styles'
+import { GridData } from '../../reducer'
 
 type CellType = {
   columnIndex: number,
   key: string,
   rowIndex: number,
   style: object
-}
-
-export type GridData = {
-  [row: number]: {
-    [col: number]: string | number
-  }
 }
 
 type SelectFn = (row: number, col: number) => void
@@ -30,6 +25,7 @@ const createCellRenderer = (
   const isColHeading = rowIndex === 0 && columnIndex > 0
   const isRoot = columnIndex === 0 && rowIndex === 0
 
+  console.log(data)
   const text = (() => {
     if (isRoot) {
       return ''

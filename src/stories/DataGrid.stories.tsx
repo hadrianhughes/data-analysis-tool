@@ -1,5 +1,6 @@
 import React from 'react'
-import DataGrid, { GridData } from '../components/DataGrid'
+import DataGrid from '../components/DataGrid'
+import { GridData } from '../reducer'
 
 export default {
   title: 'DataGrid',
