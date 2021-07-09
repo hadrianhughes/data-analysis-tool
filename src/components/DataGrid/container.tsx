@@ -41,6 +41,7 @@ const DataGridContainer = () => {
       selectedCell={selectedCell}
       onSelect={setSelectedCell}
       gridSize={gridSize}
+      editing={editing}
     />
   )
 }

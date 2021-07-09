@@ -17,17 +17,20 @@ interface DataGridProps {
   selectedCell: CellTuple
   onSelect: SelectFn
   gridSize: [number, number]
+  editing: boolean
 }
 
 const createCellRenderer = (
   data: GridData,
   selectedCell: CellTuple,
-  onMouseDown: SelectFn
+  onMouseDown: SelectFn,
+  editing: boolean
 ) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0 && rowIndex > 0
   const isColHeading = rowIndex === 0 && columnIndex > 0
   const isRoot = columnIndex === 0 && rowIndex === 0
   const [selectedRow, selectedCol] = selectedCell || []
+  const isSelected = rowIndex === selectedRow && columnIndex === selectedCol
 
   const text = (() => {
     if (isRoot) {
@@ -45,6 +48,7 @@ const createCellRenderer = (
     return data[rowIndex]?.[columnIndex] || ''
   })()
 
+  console.log('ran')
   return (
     <Cell
       key={key}
@@ -52,9 +56,13 @@ const createCellRenderer = (
       onMouseDown={() => onMouseDown(rowIndex, columnIndex)}
       isHeading={isRowHeading || isColHeading}
       isRoot={isRoot}
-      isSelected={rowIndex === selectedRow && columnIndex === selectedCol}
+      isSelected={isSelected}
     >
-      <Text>{text}</Text>
+      {
+        editing && isSelected
+          ? <input value={text} type="text" />
+          : <Text>{text}</Text>
+      }
     </Cell>
   );
 }
@@ -63,12 +71,13 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   data,
   selectedCell,
   onSelect,
-  gridSize
+  gridSize,
+  editing
 }) => {
   const [gridWidth, gridHeight] = gridSize
 
   const config = {
-    cellRenderer: createCellRenderer(data, selectedCell, onSelect),
+    cellRenderer: createCellRenderer(data, selectedCell, onSelect, editing),
     columnCount: 50,
     columnWidth: 100,
     className: 'data-grid',
@@ -85,6 +94,7 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
       {...config}
       data={data}
       selectedCell={selectedCell}
+      editing={editing}
     />
   )
 }
