@@ -1,7 +1,7 @@
 import React from 'react'
 import { MultiGrid } from 'react-virtualized'
 import { Cell, Text } from './styles'
-import { GridData } from '../../reducer'
+import { GridData, CellTuple } from '../../reducer'
 
 type CellType = {
   columnIndex: number,
@@ -14,18 +14,20 @@ type SelectFn = (row: number, col: number) => void
 
 interface DataGridProps {
   data: GridData
+  selectedCell: CellTuple
   onSelect: SelectFn
 }
 
 const createCellRenderer = (
   data: GridData,
+  selectedCell: CellTuple,
   onClick: SelectFn
 ) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0 && rowIndex > 0
   const isColHeading = rowIndex === 0 && columnIndex > 0
   const isRoot = columnIndex === 0 && rowIndex === 0
+  const [selectedRow, selectedCol] = selectedCell || []
 
-  console.log(data)
   const text = (() => {
     if (isRoot) {
       return ''
@@ -46,18 +48,19 @@ const createCellRenderer = (
     <Cell
       key={key}
       style={style}
+      onClick={() => onClick(rowIndex, columnIndex)}
       isHeading={isRowHeading || isColHeading}
       isRoot={isRoot}
-      onClick={() => onClick(rowIndex, columnIndex)}
+      isSelected={rowIndex === selectedRow && columnIndex === selectedCol}
     >
       <Text>{text}</Text>
     </Cell>
   );
 }
 
-const DataGrid: React.FunctionComponent<DataGridProps> = ({ data, onSelect }) => {
+const DataGrid: React.FunctionComponent<DataGridProps> = ({ data, selectedCell, onSelect }) => {
   const config = {
-    cellRenderer: createCellRenderer(data, onSelect),
+    cellRenderer: createCellRenderer(data, selectedCell, onSelect),
     columnCount: 50,
     columnWidth: 100,
     className: 'data-grid',
@@ -69,7 +72,13 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({ data, onSelect }) =>
     width: 1000
   }
 
-  return <MultiGrid {...config} />
+  return (
+    <MultiGrid
+      {...config}
+      data={data}
+      selectedCell={selectedCell}
+    />
+  )
 }
 
 export default DataGrid

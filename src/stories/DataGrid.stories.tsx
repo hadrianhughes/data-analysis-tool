@@ -16,6 +16,7 @@ const data: GridData = {
 export const Default = () => (
   <DataGrid
     data={data}
+    selectedCell={[2,4]}
     onSelect={(row: number, col: number) => console.log(row, col)}
   />
 )
