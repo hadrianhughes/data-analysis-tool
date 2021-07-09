@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from 'react-virtualized'
+import { MultiGrid } from 'react-virtualized'
 import { Cell, Text } from './styles'
 
 type CellType = {
@@ -51,13 +51,16 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({ data }) => {
     cellRenderer: createCellRenderer(data),
     columnCount: 50,
     columnWidth: 100,
+    className: 'data-grid',
+    fixedColumnCount: 1,
+    fixedRowCount: 1,
     height: 1000,
     rowCount: 100,
     rowHeight: 30,
     width: 1000
   }
 
-  return <Grid {...config} />
+  return <MultiGrid {...config} />
 }
 
 export default DataGrid

@@ -10,6 +10,7 @@ export const Cell = styled.div<CellProps>`
   border-bottom: none;
   border-right: none;
   cursor: cell;
+  left: 0;
   padding: 2px 5px;
 `
 
