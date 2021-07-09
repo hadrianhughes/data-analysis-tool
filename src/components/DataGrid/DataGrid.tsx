@@ -65,7 +65,7 @@ const createCellRenderer = (
     >
       {
         editing && isSelected
-          ? <input value={editValue} type="text" onChange={onEdit} ref={newRef => setInputRef(newRef)} />
+          ? <input value={editValue} type="text" onChange={onEdit} ref={setInputRef} />
           : <Text>{text}</Text>
       }
     </Cell>
