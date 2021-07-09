@@ -1,6 +1,7 @@
 import {
   AppState,
-  ActionType
+  ActionType,
+  GridData
 } from './types'
 
 const initialState: AppState = {
@@ -51,8 +52,13 @@ export default function reducer(state: AppState = initialState, action: ActionTy
       const [row, col] = state.selectedCell || []
       if (!row || !col) return state
 
-      let newGridData = { ...state.gridData }
-      newGridData[row][col] = action.payload
+      const newGridData: GridData = {
+        ...state.gridData,
+        [row]: {
+          ...state.gridData[row] || {},
+          [col]: action.payload
+        }
+      }
 
       return {
         ...state,

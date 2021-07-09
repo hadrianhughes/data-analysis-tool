@@ -24,8 +24,7 @@ const DataGridContainer = () => {
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.keyCode === 13) {
-      console.log(inputRef.current)
+    if (e.keyCode === 13 || (/^Digit\d$/.exec(e.code) && !editing)) {
       dispatch({ type: editing ? 'STOP_EDITING' : 'START_EDITING' })
     }
   }
