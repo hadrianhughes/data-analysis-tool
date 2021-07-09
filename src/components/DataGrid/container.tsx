@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DataGrid from './DataGrid'
 import { get } from '../../lib/get'
@@ -6,6 +6,8 @@ import { TOOLBAR_HEIGHT } from '../Toolbar'
 
 const DataGridContainer = () => {
   const [gridSize, setGridSize] = useState<[number, number]>([0,0])
+  const [inputRefState, setInputRef] = useState<HTMLInputElement | null>(null)
+  const inputRef = useRef(null)
 
   const data = useSelector(get('gridData', {}))
   const selectedCell = useSelector(get('selectedCell')) || []
@@ -23,6 +25,7 @@ const DataGridContainer = () => {
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.keyCode === 13) {
+      console.log(inputRef.current)
       dispatch({ type: editing ? 'STOP_EDITING' : 'START_EDITING' })
     }
   }
@@ -38,6 +41,12 @@ const DataGridContainer = () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [editing])
+
+  useEffect(() => {
+    if (inputRefState) {
+      inputRefState.focus()
+    }
+  }, [inputRefState])
 
   const setSelectedCell = (row: number, col: number) => {
     if (row > 0 && col > 0) {
@@ -57,6 +66,7 @@ const DataGridContainer = () => {
       editing={editing}
       editValue={editValue}
       onEditCell={handleEditCell}
+      setInputRef={setInputRef}
     />
   )
 }

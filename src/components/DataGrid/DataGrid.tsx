@@ -20,6 +20,7 @@ interface DataGridProps {
   editing: boolean
   editValue: string
   onEditCell: (e: React.ChangeEvent<HTMLInputElement>) => void
+  setInputRef: (ref: HTMLInputElement | null) => void
 }
 
 const createCellRenderer = (
@@ -28,7 +29,8 @@ const createCellRenderer = (
   onMouseDown: SelectFn,
   onEdit: (e: React.ChangeEvent<HTMLInputElement>) => void,
   editing: boolean,
-  editValue: string
+  editValue: string,
+  setInputRef: (ref: HTMLInputElement | null) => void
 ) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0 && rowIndex > 0
   const isColHeading = rowIndex === 0 && columnIndex > 0
@@ -63,7 +65,7 @@ const createCellRenderer = (
     >
       {
         editing && isSelected
-          ? <input value={editValue} type="text" onChange={onEdit} />
+          ? <input value={editValue} type="text" onChange={onEdit} ref={newRef => setInputRef(newRef)} />
           : <Text>{text}</Text>
       }
     </Cell>
@@ -77,7 +79,8 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   gridSize,
   editing,
   editValue,
-  onEditCell
+  onEditCell,
+  setInputRef
 }) => {
   const [gridWidth, gridHeight] = gridSize
 
@@ -88,7 +91,8 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
       onSelect,
       onEditCell,
       editing,
-      editValue
+      editValue,
+      setInputRef
     ),
     columnCount: 50,
     columnWidth: 100,
