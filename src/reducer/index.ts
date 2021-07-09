@@ -2,6 +2,7 @@ import {
   AppState,
   ActionType
 } from './types'
+import { stopEditAndPersist } from './utils'
 
 const initialState: AppState = {
   gridData: {
@@ -22,8 +23,15 @@ export default function reducer(state: AppState = initialState, action: ActionTy
         gridData: action.payload
       }
     case 'SET_SELECTED_CELL':
+      const [row, col] = action.payload
+      const [currentRow, currentCol] = state.selectedCell || []
+
+      if (row === currentRow && col === currentCol) return state
+
+      const editPersistedState = stopEditAndPersist(state)
+
       return {
-        ...state,
+        ...editPersistedState,
         selectedCell: action.payload
       }
     case 'START_EDITING': {
@@ -38,21 +46,8 @@ export default function reducer(state: AppState = initialState, action: ActionTy
         activeCellContents: String(gridData[row]?.[col])
       }
     }
-    case 'STOP_EDITING': {
-      const { selectedCell } = state
-      const [row, col] = selectedCell || []
-
-      if (!row || !col) return state
-
-      let newData = { ...state.gridData }
-      newData[row][col] = state.activeCellContents
-
-      return {
-        ...state,
-        gridData: newData,
-        editing: false,
-      }
-    }
+    case 'STOP_EDITING':
+      return stopEditAndPersist(state)
     case 'SET_ACTIVE_CELL_CONTENTS':
       return {
         ...state,
