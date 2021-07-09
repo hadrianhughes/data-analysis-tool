@@ -1,7 +1,7 @@
 import React from 'react'
 import { MultiGrid } from 'react-virtualized'
 import { Cell, Text } from './styles'
-import { GridData, CellTuple } from '../../reducer'
+import { GridData, CellTuple } from '../../reducer/types'
 
 type CellType = {
   columnIndex: number,
@@ -48,7 +48,6 @@ const createCellRenderer = (
     return data[rowIndex]?.[columnIndex] || ''
   })()
 
-  console.log('ran')
   return (
     <Cell
       key={key}
