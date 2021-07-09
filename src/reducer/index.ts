@@ -37,6 +37,11 @@ export default function reducer(state: AppState = initialState, action: ActionTy
         editing: action.payload,
         activeCellContents: String(gridData[row]?.[col])
       }
+    case 'SET_ACTIVE_CELL_CONTENTS':
+      return {
+        ...state,
+        activeCellContents: action.payload
+      }
     default:
       return state
   }

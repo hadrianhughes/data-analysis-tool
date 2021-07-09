@@ -28,7 +28,13 @@ export type SetEditingAction = {
   payload: boolean
 }
 
+export type SetActiveCellContentsAction = {
+  type: 'SET_ACTIVE_CELL_CONTENTS',
+  payload: string
+}
+
 export type ActionType =
   SetDataAction |
   SetSelectedCellAction |
-  SetEditingAction
+  SetEditingAction |
+  SetActiveCellContentsAction

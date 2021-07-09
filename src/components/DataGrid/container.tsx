@@ -13,8 +13,15 @@ const DataGridContainer = () => {
   const editValue = useSelector(get('activeCellContents'))
   const dispatch = useDispatch()
 
+  const handleEditCell = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: 'SET_ACTIVE_CELL_CONTENTS',
+      payload: e.target.value
+    })
+  }
+
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && !editing) {
       dispatch({
         type: 'SET_EDITING',
         payload: true
@@ -24,7 +31,6 @@ const DataGridContainer = () => {
 
   useEffect(() => {
     setGridSize([window.innerWidth / 2, window.innerHeight - TOOLBAR_HEIGHT])
-    window.addEventListener('keydown', handleKeyDown)
   }, [])
 
   const setSelectedCell = (row: number, col: number) => {
@@ -44,6 +50,8 @@ const DataGridContainer = () => {
       gridSize={gridSize}
       editing={editing}
       editValue={editValue}
+      onEditCell={handleEditCell}
+      onKeyDown={handleKeyDown}
     />
   )
 }
