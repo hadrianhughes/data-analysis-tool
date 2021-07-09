@@ -9,7 +9,17 @@ type CellType = {
   style: object
 }
 
-const cellRenderer = ({ columnIndex, key, rowIndex, style }: CellType) => {
+export type GridData = {
+  [row: number]: {
+    [col: number]: string | number
+  }
+}
+
+interface DataGridProps {
+  data: GridData
+}
+
+const createCellRenderer = (data: GridData) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0
   const isColHeading = rowIndex === 0
 
@@ -26,7 +36,7 @@ const cellRenderer = ({ columnIndex, key, rowIndex, style }: CellType) => {
       return 'C' + columnIndex
     }
 
-    return 1
+    return data[rowIndex]?.[columnIndex] || ''
   })()
 
   return (
@@ -36,18 +46,18 @@ const cellRenderer = ({ columnIndex, key, rowIndex, style }: CellType) => {
   );
 }
 
-const config = {
-  cellRenderer,
-  columnCount: 50,
-  columnWidth: 100,
-  height: 1000,
-  rowCount: 100,
-  rowHeight: 30,
-  width: 1000
-}
+const DataGrid: React.FunctionComponent<DataGridProps> = ({ data }) => {
+  const config = {
+    cellRenderer: createCellRenderer(data),
+    columnCount: 50,
+    columnWidth: 100,
+    height: 1000,
+    rowCount: 100,
+    rowHeight: 30,
+    width: 1000
+  }
 
-const DataGrid = () => (
-  <Grid {...config} />
-)
+  return <Grid {...config} />
+}
 
 export default DataGrid

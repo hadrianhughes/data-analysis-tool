@@ -1,9 +1,15 @@
 import React from 'react'
-import DataGrid from '../components/DataGrid'
+import DataGrid, { GridData } from '../components/DataGrid'
 
 export default {
   title: 'DataGrid',
   component: DataGrid
 }
 
-export const Default = () => <DataGrid />
+const data: GridData = {
+  2: {
+    10: 1
+  }
+}
+
+export const Default = () => <DataGrid data={data} />
