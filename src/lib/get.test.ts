@@ -1,4 +1,4 @@
-import { get } from './utils'
+import { get } from './get'
 
 describe('get function', () => {
   it('Should return one property from object', () => {

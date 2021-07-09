@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DataGrid from './DataGrid'
-import { get } from '../../utils'
+import { get } from '../../lib/get'
 import { TOOLBAR_HEIGHT } from '../Toolbar'
 
 const DataGridContainer = () => {
