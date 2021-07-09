@@ -10,6 +10,7 @@ export type AppState = {
   gridData: GridData
   selectedCell: CellTuple | null
   editing: boolean
+  activeCellContents: string
 }
 
 export type SetDataAction = {

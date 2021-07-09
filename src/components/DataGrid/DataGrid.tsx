@@ -18,13 +18,15 @@ interface DataGridProps {
   onSelect: SelectFn
   gridSize: [number, number]
   editing: boolean
+  editValue: string
 }
 
 const createCellRenderer = (
   data: GridData,
   selectedCell: CellTuple,
   onMouseDown: SelectFn,
-  editing: boolean
+  editing: boolean,
+  editValue: string
 ) => ({ columnIndex, key, rowIndex, style }: CellType) => {
   const isRowHeading = columnIndex === 0 && rowIndex > 0
   const isColHeading = rowIndex === 0 && columnIndex > 0
@@ -59,7 +61,7 @@ const createCellRenderer = (
     >
       {
         editing && isSelected
-          ? <input value={text} type="text" />
+          ? <input value={editValue} type="text" />
           : <Text>{text}</Text>
       }
     </Cell>
@@ -71,12 +73,19 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   selectedCell,
   onSelect,
   gridSize,
-  editing
+  editing,
+  editValue
 }) => {
   const [gridWidth, gridHeight] = gridSize
 
   const config = {
-    cellRenderer: createCellRenderer(data, selectedCell, onSelect, editing),
+    cellRenderer: createCellRenderer(
+      data,
+      selectedCell,
+      onSelect,
+      editing,
+      editValue
+    ),
     columnCount: 50,
     columnWidth: 100,
     className: 'data-grid',
@@ -94,6 +103,7 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
       data={data}
       selectedCell={selectedCell}
       editing={editing}
+      editValue={editValue}
     />
   )
 }

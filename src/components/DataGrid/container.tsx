@@ -10,6 +10,7 @@ const DataGridContainer = () => {
   const data = useSelector(get('gridData', {}))
   const selectedCell = useSelector(get('selectedCell'))
   const editing = useSelector(get('editing'))
+  const editValue = useSelector(get('activeCellContents'))
   const dispatch = useDispatch()
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -42,6 +43,7 @@ const DataGridContainer = () => {
       onSelect={setSelectedCell}
       gridSize={gridSize}
       editing={editing}
+      editValue={editValue}
     />
   )
 }

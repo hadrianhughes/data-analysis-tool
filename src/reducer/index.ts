@@ -10,7 +10,8 @@ const initialState: AppState = {
     }
   },
   selectedCell: null,
-  editing: false
+  editing: false,
+  activeCellContents: ''
 }
 
 export default function reducer(state: AppState = initialState, action: ActionType) {
@@ -26,9 +27,15 @@ export default function reducer(state: AppState = initialState, action: ActionTy
         selectedCell: action.payload
       }
     case 'SET_EDITING':
+      const { gridData, selectedCell } = state
+      const [row, col] = selectedCell || []
+
+      if (!row || !col) return state
+
       return {
         ...state,
-        editing: action.payload
+        editing: action.payload,
+        activeCellContents: String(gridData[row]?.[col])
       }
     default:
       return state

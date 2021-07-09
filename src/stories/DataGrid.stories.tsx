@@ -20,5 +20,6 @@ export const Default = () => (
     onSelect={(row: number, col: number) => console.log(row, col)}
     gridSize={[500,500]}
     editing={false}
+    editValue=""
   />
 )
