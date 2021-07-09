@@ -8,10 +8,14 @@ const DataGridContainer = () => {
   const selectedCell = useSelector(get('selectedCell'))
   const dispatch = useDispatch()
 
-  const setSelectedCell = (row: number, col: number) => dispatch({
-    type: 'SET_SELECTED_CELL',
-    payload: [row, col]
-  })
+  const setSelectedCell = (row: number, col: number) => {
+    if (row > 0 && col > 0) {
+      dispatch({
+        type: 'SET_SELECTED_CELL',
+        payload: [row, col]
+      })
+    }
+  }
 
   return (
     <DataGrid
