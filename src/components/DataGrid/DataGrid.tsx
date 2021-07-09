@@ -20,7 +20,6 @@ interface DataGridProps {
   editing: boolean
   editValue: string
   onEditCell: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onKeyDown: (e: KeyboardEvent) => void
 }
 
 const createCellRenderer = (
@@ -78,8 +77,7 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   gridSize,
   editing,
   editValue,
-  onEditCell,
-  onKeyDown
+  onEditCell
 }) => {
   const [gridWidth, gridHeight] = gridSize
 
@@ -106,7 +104,6 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   return (
     <MultiGrid
       {...config}
-      onKeyDown={onKeyDown}
       data={data}
       selectedCell={selectedCell}
       editing={editing}

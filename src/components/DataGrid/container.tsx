@@ -33,6 +33,14 @@ const DataGridContainer = () => {
     setGridSize([window.innerWidth / 2, window.innerHeight - TOOLBAR_HEIGHT])
   }, [])
 
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [editing])
+
   const setSelectedCell = (row: number, col: number) => {
     if (row > 0 && col > 0) {
       dispatch({
