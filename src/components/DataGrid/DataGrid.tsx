@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid } from 'react-virtualized'
-import { Cell } from './styles'
+import { Cell, Text } from './styles'
 
 type CellType = {
   columnIndex: number,
@@ -12,7 +12,7 @@ type CellType = {
 const cellRenderer = ({ columnIndex, key, rowIndex, style }: CellType) => {
   return (
     <Cell key={key} style={style}>
-      1
+      <Text>1</Text>
     </Cell>
   );
 }
