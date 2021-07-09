@@ -10,9 +10,28 @@ type CellType = {
 }
 
 const cellRenderer = ({ columnIndex, key, rowIndex, style }: CellType) => {
+  const isRowHeading = columnIndex === 0
+  const isColHeading = rowIndex === 0
+
+  const text = (() => {
+    if (isRowHeading && isColHeading) {
+      return ''
+    }
+
+    if (isRowHeading) {
+      return String(rowIndex)
+    }
+
+    if (isColHeading) {
+      return 'C' + columnIndex
+    }
+
+    return 1
+  })()
+
   return (
-    <Cell key={key} style={style}>
-      <Text>1</Text>
+    <Cell key={key} style={style} isHeading={isRowHeading || isColHeading}>
+      <Text>{text}</Text>
     </Cell>
   );
 }

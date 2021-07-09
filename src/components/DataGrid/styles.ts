@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
-export const Cell = styled.div`
+interface CellProps {
+  isHeading: boolean
+}
+
+export const Cell = styled.div<CellProps>`
+  background-color: ${props => props.isHeading ? 'lightgrey' : 'white'};
   border: 1px solid grey;
   border-bottom: none;
   border-right: none;
