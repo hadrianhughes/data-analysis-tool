@@ -2,10 +2,15 @@ import styled from 'styled-components'
 
 interface CellProps {
   isHeading: boolean
+  isRoot: boolean
 }
 
 export const Cell = styled.div<CellProps>`
-  background-color: ${props => props.isHeading ? 'lightgrey' : 'white'};
+  background-color: ${({ isRoot, isHeading }) => {
+    if (isRoot) return 'darkgrey'
+    if (isHeading) return 'lightgrey'
+    return 'white'
+  }};
   border: 1px solid grey;
   border-bottom: none;
   border-right: none;

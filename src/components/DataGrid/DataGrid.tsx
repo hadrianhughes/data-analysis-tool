@@ -20,11 +20,12 @@ interface DataGridProps {
 }
 
 const createCellRenderer = (data: GridData) => ({ columnIndex, key, rowIndex, style }: CellType) => {
-  const isRowHeading = columnIndex === 0
-  const isColHeading = rowIndex === 0
+  const isRowHeading = columnIndex === 0 && rowIndex > 0
+  const isColHeading = rowIndex === 0 && columnIndex > 0
+  const isRoot = columnIndex === 0 && rowIndex === 0
 
   const text = (() => {
-    if (isRowHeading && isColHeading) {
+    if (isRoot) {
       return ''
     }
 
@@ -40,7 +41,12 @@ const createCellRenderer = (data: GridData) => ({ columnIndex, key, rowIndex, st
   })()
 
   return (
-    <Cell key={key} style={style} isHeading={isRowHeading || isColHeading}>
+    <Cell
+      key={key}
+      style={style}
+      isHeading={isRowHeading || isColHeading}
+      isRoot={isRoot}
+    >
       <Text>{text}</Text>
     </Cell>
   );
