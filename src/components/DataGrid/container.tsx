@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DataGrid from './DataGrid'
 import { get } from '../../utils'
 
 const DataGridContainer = () => {
+  const [gridSize, setGridSize] = useState<[number, number]>([0,0])
+
+  useEffect(() => {
+    setGridSize([window.innerWidth / 2, window.innerHeight])
+  }, [])
+
   const data = useSelector(get('gridData', {}))
   const selectedCell = useSelector(get('selectedCell'))
   const dispatch = useDispatch()
@@ -22,6 +28,7 @@ const DataGridContainer = () => {
       data={data}
       selectedCell={selectedCell}
       onSelect={setSelectedCell}
+      gridSize={gridSize}
     />
   )
 }

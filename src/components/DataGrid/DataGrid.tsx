@@ -16,6 +16,7 @@ interface DataGridProps {
   data: GridData
   selectedCell: CellTuple
   onSelect: SelectFn
+  gridSize: [number, number]
 }
 
 const createCellRenderer = (
@@ -58,7 +59,14 @@ const createCellRenderer = (
   );
 }
 
-const DataGrid: React.FunctionComponent<DataGridProps> = ({ data, selectedCell, onSelect }) => {
+const DataGrid: React.FunctionComponent<DataGridProps> = ({
+  data,
+  selectedCell,
+  onSelect,
+  gridSize
+}) => {
+  const [gridWidth, gridHeight] = gridSize
+
   const config = {
     cellRenderer: createCellRenderer(data, selectedCell, onSelect),
     columnCount: 50,
@@ -66,10 +74,10 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({ data, selectedCell, 
     className: 'data-grid',
     fixedColumnCount: 1,
     fixedRowCount: 1,
-    height: 1000,
+    height: gridHeight,
     rowCount: 100,
     rowHeight: 30,
-    width: 1000
+    width: gridWidth
   }
 
   return (
