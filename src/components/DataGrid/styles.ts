@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { COLORS } from '../../styles/settings'
 
 interface CellProps {
   isHeading: boolean
@@ -17,7 +18,7 @@ export const Cell = styled.div<CellProps>`
     if (isSelected) {
       return css`
         &::after {
-          border: 3px solid lightblue;
+          border: 3px solid ${COLORS.brand};
           content: '';
           height: 100%;
           left: 50%;
