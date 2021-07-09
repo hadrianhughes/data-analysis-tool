@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DataGrid from './DataGrid'
 import { get } from '../../utils'
+import { TOOLBAR_HEIGHT } from '../Toolbar'
 
 const DataGridContainer = () => {
   const [gridSize, setGridSize] = useState<[number, number]>([0,0])
 
   useEffect(() => {
-    setGridSize([window.innerWidth / 2, window.innerHeight])
+    setGridSize([window.innerWidth / 2, window.innerHeight - TOOLBAR_HEIGHT])
   }, [])
 
   const data = useSelector(get('gridData', {}))
