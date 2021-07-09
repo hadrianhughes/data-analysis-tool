@@ -2,7 +2,6 @@ import {
   AppState,
   ActionType
 } from './types'
-import { stopEditAndPersist } from './utils'
 
 const initialState: AppState = {
   gridData: {
@@ -11,8 +10,7 @@ const initialState: AppState = {
     }
   },
   selectedCell: null,
-  editing: false,
-  activeCellContents: ''
+  editing: false
 }
 
 export default function reducer(state: AppState = initialState, action: ActionType) {
@@ -28,14 +26,13 @@ export default function reducer(state: AppState = initialState, action: ActionTy
 
       if (row === currentRow && col === currentCol) return state
 
-      const editPersistedState = stopEditAndPersist(state)
-
       return {
-        ...editPersistedState,
-        selectedCell: action.payload
+        ...state,
+        selectedCell: action.payload,
+        editing: false
       }
     case 'START_EDITING': {
-      const { gridData, selectedCell } = state
+      const { selectedCell } = state
       const [row, col] = selectedCell || []
 
       if (!row || !col) return state
@@ -43,16 +40,25 @@ export default function reducer(state: AppState = initialState, action: ActionTy
       return {
         ...state,
         editing: true,
-        activeCellContents: String(gridData[row]?.[col])
       }
     }
     case 'STOP_EDITING':
-      return stopEditAndPersist(state)
-    case 'SET_ACTIVE_CELL_CONTENTS':
       return {
         ...state,
-        activeCellContents: action.payload
+        editing: false
       }
+    case 'SET_ACTIVE_CELL_CONTENTS': {
+      const [row, col] = state.selectedCell || []
+      if (!row || !col) return state
+
+      let newGridData = { ...state.gridData }
+      newGridData[row][col] = action.payload
+
+      return {
+        ...state,
+        gridData: newGridData
+      }
+    }
     default:
       return state
   }

@@ -1,18 +1,16 @@
 import { AppState } from './types'
 
-export const stopEditAndPersist = (state: AppState): AppState => {
-  const { gridData, selectedCell, activeCellContents, editing } = state
+export const editCell = (state: AppState, value: string): AppState => {
+  const { gridData, selectedCell } = state
   const [row, col] = selectedCell || []
 
-  if (!row || !col || !editing) return state
+  if (!row || !col) return state
 
-  let newData = { ...gridData }
-  newData[row][col] = activeCellContents
+  let newGridData = { ...gridData }
+  newGridData[row][col] = value
 
   return {
     ...state,
-    gridData: newData,
-    activeCellContents: '',
-    editing: false
+    gridData: newGridData
   }
 }

@@ -8,9 +8,10 @@ const DataGridContainer = () => {
   const [gridSize, setGridSize] = useState<[number, number]>([0,0])
 
   const data = useSelector(get('gridData', {}))
-  const selectedCell = useSelector(get('selectedCell'))
+  const selectedCell = useSelector(get('selectedCell')) || []
+  const [row, col] = selectedCell
   const editing = useSelector(get('editing'))
-  const editValue = useSelector(get('activeCellContents'))
+  const editValue = useSelector(get(`gridData.${row}.${col}`))
   const dispatch = useDispatch()
 
   const handleEditCell = (e: React.ChangeEvent<HTMLInputElement>) => {
