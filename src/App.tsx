@@ -1,13 +1,9 @@
 import React from 'react'
-import { DataGridContainer as DataGrid } from './components/DataGrid'
-import Toolbar from './components/Toolbar'
+import Layout from './components/Layout'
 
 function App() {
   return (
-    <>
-      <Toolbar />
-      <DataGrid />
-    </>
+    <Layout />
   );
 }
 
