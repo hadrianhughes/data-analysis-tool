@@ -1,6 +1,6 @@
 import React from 'react'
 import { MultiGrid } from 'react-virtualized'
-import { Cell, Text } from './styles'
+import { Cell, Text, Input } from './styles'
 import { GridData, CellTuple } from '../../reducer/types'
 
 type CellType = {
@@ -65,7 +65,7 @@ const createCellRenderer = (
     >
       {
         editing && isSelected
-          ? <input value={editValue} type="text" onChange={onEdit} ref={setInputRef} />
+          ? <Input value={editValue} type="text" onChange={onEdit} ref={setInputRef} />
           : <Text>{text}</Text>
       }
     </Cell>

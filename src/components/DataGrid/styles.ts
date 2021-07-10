@@ -37,6 +37,7 @@ export const Cell = styled.div<CellProps>`
   border-right: none;
   box-sizing: border-box;
   font-family: sans-serif;
+  font-size: 16px;
   cursor: ${props => props.isHeading || props.isRoot ? 'default' : 'cell'};
   left: 0;
   padding: 2px 5px;
@@ -46,4 +47,12 @@ export const Text = styled.span`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+`
+
+export const Input = styled.input`
+  border: none;
+  height: 100%;
+  outline: none;
+  font-family: 16px;
+  width: 100%;
 `
