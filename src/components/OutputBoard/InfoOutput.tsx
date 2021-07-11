@@ -1,5 +1,7 @@
 import React from 'react'
-import { BlockHeading, BlockParagraph, Block } from './styles'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
 
 interface InfoOutputProps {
   heading: string
@@ -10,10 +12,12 @@ const InfoOutput: React.FunctionComponent<InfoOutputProps> = ({
   heading,
   body
 }) => (
-  <Block>
-    <BlockHeading>{heading}</BlockHeading>
-    <BlockParagraph>{body}</BlockParagraph>
-  </Block>
+  <Card>
+    <CardContent>
+      <Typography variant="h4" paragraph>{heading}</Typography>
+      <Typography variant="body1">{body}</Typography>
+    </CardContent>
+  </Card>
 )
 
 export default InfoOutput

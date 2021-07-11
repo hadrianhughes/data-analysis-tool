@@ -1,13 +1,31 @@
 import React from 'react'
-import { Wrapper, Button } from './styles'
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
 
-const Toolbar: React.FunctionComponent = () => (
-  <Wrapper>
-    <div />
-    <div>
-      <Button type="button">Graph</Button>
-    </div>
-  </Wrapper>
-)
+const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'static'
+  },
+  toolbar: {
+    justifyContent: 'space-between'
+  }
+}))
 
-export default Toolbar
+const Nav: React.FunctionComponent = () => {
+  const classes = useStyles()
+
+  return (
+    <AppBar className={classes.root}>
+      <Toolbar className={classes.toolbar}>
+        <div />
+        <div>
+          <Button variant="contained" color="secondary">Graph</Button>
+        </div>
+      </Toolbar>
+    </AppBar>
+  )
+}
+
+export default Nav
