@@ -1,8 +1,21 @@
 import React from 'react'
 import { Container } from './styles'
+import { InfoOutput as InfoOutputType } from '../../reducer/types'
+import InfoOutput from './InfoOutput'
 
-const OutputBoard: React.FunctionComponent = () => (
-  <Container />
+interface OutputBoardProps {
+  outputs: InfoOutputType[]
+}
+
+const OutputBoard: React.FunctionComponent<OutputBoardProps> = ({ outputs }) => (
+  <Container>
+    {outputs.map(o => (
+      <InfoOutput
+        heading={o.heading}
+        body={o.body}
+      />
+    ))}
+  </Container>
 )
 
 export default OutputBoard

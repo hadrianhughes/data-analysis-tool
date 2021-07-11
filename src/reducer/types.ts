@@ -6,10 +6,17 @@ export type GridData = {
 
 export type CellTuple = [number, number]
 
+export type InfoOutput = {
+  type: 'INFO'
+  heading: string
+  body: string
+}
+
 export type AppState = {
   gridData: GridData
   selectedCell: CellTuple | null
   editing: boolean
+  outputs: InfoOutput[]
 }
 
 export type SetDataAction = {

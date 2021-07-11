@@ -11,7 +11,14 @@ const initialState: AppState = {
     }
   },
   selectedCell: null,
-  editing: false
+  editing: false,
+  outputs: [
+    {
+      type: 'INFO',
+      heading: 'Welcome',
+      body: 'Outputs will appear here'
+    }
+  ]
 }
 
 export default function reducer(state: AppState = initialState, action: ActionType) {
