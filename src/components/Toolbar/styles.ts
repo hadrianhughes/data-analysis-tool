@@ -5,7 +5,9 @@ export const TOOLBAR_HEIGHT = 50
 
 export const Wrapper = styled.section`
   background-color: ${COLORS.pastelGreen};
+  display: flex;
   height: ${TOOLBAR_HEIGHT}px;
+  justify-content: space-between;
   position: relative;
 
   &::after {
@@ -16,4 +18,13 @@ export const Wrapper = styled.section`
     position: absolute;
     width: 100%;
   }
+`
+
+export const Button = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  height: 100%;
+  padding: 0 20px;
 `

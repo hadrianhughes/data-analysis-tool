@@ -1,8 +1,12 @@
 import React from 'react'
-import { Wrapper } from './styles'
+import { Wrapper, Button } from './styles'
 
 const Toolbar: React.FunctionComponent = () => (
   <Wrapper>
+    <div />
+    <div>
+      <Button type="button">Graph</Button>
+    </div>
   </Wrapper>
 )
 
