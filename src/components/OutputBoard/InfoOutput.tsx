@@ -1,4 +1,5 @@
 import React from 'react'
+import { BlockHeading, BlockParagraph, Block } from './styles'
 
 interface InfoOutputProps {
   heading: string
@@ -9,10 +10,10 @@ const InfoOutput: React.FunctionComponent<InfoOutputProps> = ({
   heading,
   body
 }) => (
-  <article>
-    <h2>{heading}</h2>
-    <p>{body}</p>
-  </article>
+  <Block>
+    <BlockHeading>{heading}</BlockHeading>
+    <BlockParagraph>{body}</BlockParagraph>
+  </Block>
 )
 
 export default InfoOutput
