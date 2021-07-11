@@ -9,7 +9,7 @@ export const Wrapper = styled.section`
   position: relative;
 
   &::after {
-    background-color: #d8d8d8;
+    background-color: ${COLORS.lightGrey};
     bottom: 0;
     content: '';
     height: 1px;

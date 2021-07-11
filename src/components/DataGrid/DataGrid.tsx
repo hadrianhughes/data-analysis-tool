@@ -1,6 +1,6 @@
 import React from 'react'
 import { MultiGrid } from 'react-virtualized'
-import { Cell, Text, Input } from './styles'
+import { Cell, Text, Input, Container } from './styles'
 import { GridData, CellTuple } from '../../reducer/types'
 
 type CellType = {
@@ -106,13 +106,15 @@ const DataGrid: React.FunctionComponent<DataGridProps> = ({
   }
 
   return (
-    <MultiGrid
-      {...config}
-      data={data}
-      selectedCell={selectedCell}
-      editing={editing}
-      editValue={editValue}
-    />
+    <Container>
+      <MultiGrid
+        {...config}
+        data={data}
+        selectedCell={selectedCell}
+        editing={editing}
+        editValue={editValue}
+      />
+    </Container>
   )
 }
 

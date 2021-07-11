@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { COLORS } from '../../styles/settings'
+import { MultiGrid } from 'react-virtualized'
 
 interface CellProps {
   isHeading: boolean
@@ -55,4 +56,8 @@ export const Input = styled.input`
   outline: none;
   font-family: 16px;
   width: 100%;
+`
+
+export const Container = styled.section`
+  border-right: 1px solid ${COLORS.lightGrey};
 `
