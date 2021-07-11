@@ -1,12 +1,12 @@
 import React from 'react'
 import { DataGridContainer as DataGrid } from '../DataGrid'
-import Toolbar from '../Toolbar'
+import Nav from '../Nav'
 import OutputBoard from '../OutputBoard/container'
 import { Main } from './styles'
 
 const Layout: React.FunctionComponent = () => (
   <div>
-    <Toolbar />
+    <Nav />
     <Main>
       <DataGrid />
       <OutputBoard />
